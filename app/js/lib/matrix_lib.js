@@ -1,19 +1,4 @@
 var mlib = {
-	//////////////////////////////
-  	// UTILITIES
-  	//////////////////////////////
-	getJsonSize : function(json){
-		var key, count = 0;
-		for(key in json) {
-		  if(json.hasOwnProperty(key)) {
-		    count++;
-		  }
-		}
-		return count;
-	},
-	//////////////////////////////
-  	// Matrix manipulation
-  	//////////////////////////////
  	displayMatrice: function(matrice){
 		matrice.map(function(line){
 			if(line.length == undefined)line = [line];
@@ -34,7 +19,6 @@ var mlib = {
  		var done = false;
  		matrice.forEach(function(line){
  			if(done == false){
- 				//console.log(line)
  				line.forEach(function(val){
 	 				if(done == false){
 	 					if(val == 0){
@@ -62,7 +46,6 @@ var mlib = {
  		var done = false;
  		matrice.forEach(function(line){
  			if(done != true){
-	 			//console.log("line ",y," : ",line);
 	 			if(y >= pos[1]){// Si on est à la bonne hauteur
 	 				l = 0;
 	 				if(line[pos[0]] == 0){
@@ -86,16 +69,11 @@ var mlib = {
 	 			y = y+1;	
  			}
  		});
- 		//console.log("largeurs: ",largeurs)
  		largeur = Math.min.apply(Math,largeurs);
  		if(largeur == Infinity) largeur = 0;
  		return [largeur,Longueur];
  	},
  	matriceFusion : function(m1,m2){
- 		// console.log('###################')
- 		// mlib.displayMatrice(m1)
- 		// console.log('------')
- 		// mlib.displayMatrice(m2)
  		var i = 0;
  		var first = [];
  		var second = [];
@@ -118,8 +96,6 @@ var mlib = {
  			l = l+1;
  		});
  		var m5 = mlib.completeEmptyMatrice(m4);
- 		// console.log('------')
- 		// mlib.displayMatrice(m5)
  		return m5;
  	},
  	completeEmptyMatrice : function(matrice){
@@ -187,12 +163,6 @@ var mlib = {
 		});
  	},
  	positionMatriceIntoMatrice : function(main,m,pos){
- 		console.log('###################')
- 		console.log("position: ",pos)
- 		mlib.displayMatrice(main)
- 		console.log('------ add')
- 		mlib.displayMatrice(m)
-
  		var result = [];
  		var delta_x = pos[0];
  		var delta_y = pos[1];
@@ -202,7 +172,6 @@ var mlib = {
  		if(h_m == undefined)h_m=1;
  		var l_main = 0;
  		var h_main = 0;
- 		//console.log("lm: ",l_m,"hm: ",h_m)
  		while(l_main<l_m){
  			while(h_main<h_m){
  				if(m[0].length != undefined){
@@ -216,8 +185,50 @@ var mlib = {
  			h_main = 0;
  			l_main = l_main+1;	
  		}
- 		console.log(' = ')
- 		mlib.displayMatrice(main)
  		return main;
  	},
+ 	getYArrayInMatrix : function(y1,y2,matrice){
+ 		var result = [];
+ 		for(l = 0; l < matrice.length; l++){
+		    for(c = 0; c < matrice[l].length; c++){
+		        if(matrice[l][c] == y1){
+		        	if(l+1 < matrice.length){
+		        		if(matrice[l+1][c] == y2){
+		        			// On prend les coordonnees du plus petit
+		        			if(matrice[l][c] < matrice[l+1][c]) result.unshift([c,l]);
+		        			else result.unshift([c,l+1]);
+		        		} 	
+		        	}
+		        }
+		    }
+		}
+
+		return result;
+ 	},
+ 	getXArrayInMatrix : function(x1,x2,matrice){
+ 		var result = [];
+ 		for(l = 0; l < matrice.length; l++){
+		    for(c = 0; c < matrice[l].length; c++){
+		        if(matrice[l][c] == x1){
+		        	if(c+1 < matrice[0].length){
+		        		if(matrice[l][c+1] == x2){
+		        			// On prend les coordonnees du plus petit
+		        			if(matrice[l][c] < matrice[l][c+1]) result.unshift([c,l]);
+		        			else result.unshift([c+1,l]);
+		        		} 	
+		        	}
+		        }
+		    }
+		}
+
+		return result;
+ 	},
+ 	setValToCoordinates : function(val,matrice,coordinates){
+ 		var result = matrice;
+ 		coordinates.forEach(function(c){
+ 			matrice[c[1]][c[0]] = val;
+ 		});
+
+		return result;
+ 	}
  }
