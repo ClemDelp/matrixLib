@@ -65,6 +65,22 @@ describe('matrix lib test', function(){
 
     });
 
+    it('getDiagoArrayIntoMatrix', function(){
+        var m1 = [
+            [0,0,0],
+            [0,1,0],
+            [1,1,0],
+            [0,0,1],
+        ];
+
+        // expect(mlib.getDiagoArrayIntoMatrix([0,1],"no-se",m1)).toEqual([[0,1],[0,0]]);
+        // expect(mlib.getDiagoArrayIntoMatrix([1,0],"no-se",m1)).toEqual([[1,3],[2,2]]);
+
+        // expect(mlib.getDiagoArrayIntoMatrix([0,1],"ne-so",m1)).toEqual([[2,1],[2,0]]);
+        expect(mlib.getDiagoArrayIntoMatrix([1,0],"ne-so",m1)).toEqual([[0,3]]);
+
+    });
+
     it('setValToCoordinates', function(){
         var m1 = [
             [0,0,0],
@@ -79,8 +95,6 @@ describe('matrix lib test', function(){
             [0,0,9],
             [0,9,0],
         ]);
-
-
     });
 
 
