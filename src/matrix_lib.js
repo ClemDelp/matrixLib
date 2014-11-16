@@ -254,6 +254,33 @@ var mlib = {
 
 		return result;
  	},
+ 	getSquareIntoMatrix : function(m1,m2){
+ 		var result = [];
+ 		for(l = 0; l < m2.length; l++){
+		    for(c = 0; c < m2[l].length; c++){
+		        if(m2[l][c] == m1[0][0]){
+		        	if(c+1 < m2[0].length){
+		        		if(m2[l][c+1] == m1[0][1]){
+		        			if(l+1 < m2.length){
+		        				if(m2[l+1][c] == m1[1][0]){
+		        					if(m2[l+1][c+1] == m1[1][1]){
+		        						// On prend les coordonnees du plus petit
+		        						result.unshift([c,l])
+					        			// if((m2[l][c] < m2[l][c+1])&&(m2[l][c] < m2[l+1][c])&&(m2[l][c] < m2[l+1][c+1])) result.unshift([c,l]);
+					        			// else if((m2[l+1][c] < m2[l][c])&&(m2[l+1][c] < m2[l+1][c+1])&&(m2[l+1][c] < m2[l][c+1])) result.unshift([c,l+1]);
+					        			// else if((m2[l][c+1] < m2[l][c])&&(m2[l][c+1] < m2[l+1][c+1])&&(m2[l][c+1] < m2[l+1][c])) result.unshift([c+1,l]);
+					        			// else result.unshift([c+1,l+1]);
+		        					}
+		        				}
+		        			}
+		        		} 	
+		        	}
+		        }
+		    }
+		}
+
+		return result;
+ 	},
  	setValToCoordinates : function(val,matrice,coordinates){
  		var result = matrice;
  		coordinates.forEach(function(c){

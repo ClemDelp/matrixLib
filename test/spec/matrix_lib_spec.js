@@ -81,6 +81,20 @@ describe('matrix lib test', function(){
 
     });
 
+    it('getSquareIntoMatrix', function(){
+        var m1 = [
+            [0,0],
+            [0,1],
+        ];
+        var m2 = [
+            [0,0,0],
+            [0,1,0],
+            [1,0,0],
+            [0,0,1],
+        ];
+        expect(mlib.getSquareIntoMatrix(m1,m2)).toEqual([[1,2],[0,0]]);
+    });
+
     it('setValToCoordinates', function(){
         var m1 = [
             [0,0,0],
